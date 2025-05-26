@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 3fb1bc6368ba9fd44a7cc35285e0261c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Aquire
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b179f08f42f1fde48b226f59b43b98b9, type: 3}
+  - {fileID: 12800000, guid: 94e8dc91de071534dbe81f7f6e24e426, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
