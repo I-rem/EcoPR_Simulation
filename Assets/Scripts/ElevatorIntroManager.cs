@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ElevatorIntroManager : MonoBehaviour
 {
@@ -10,11 +11,25 @@ public class ElevatorIntroManager : MonoBehaviour
     public float moveDuration = 1f;   // Seconds it takes to open
     public AudioSource dingSound;
 
+    public float typeDelay = 0.03f;
+    public GameObject mascot;
+    public CanvasGroup dialogueBox;
+    public Text dialogueText;
+    public Button continueButton;
+
+     private string[] introLines = new string[]
+    {
+        "Ding! Welcome to GreenCore Solutions™!",
+        "I'm Verdy, your loyal sustainability ambassador.",
+        "We're here to help you *look* green, *feel* green... without necessarily *being* green.",
+        "Ready to save the planet... one PR campaign at a time?"
+    };
+
     void Start()
     {
         StartCoroutine(PlayIntroSequence());
-        Destroy(leftDoor);
-        Destroy(rightDoor);
+        
+        
     }
 
     IEnumerator PlayIntroSequence()
@@ -50,5 +65,53 @@ public class ElevatorIntroManager : MonoBehaviour
 
         leftDoor.anchoredPosition = leftTarget;
         rightDoor.anchoredPosition = rightTarget;
+        Destroy(leftDoor);
+        Destroy(rightDoor);
+        StartCoroutine(PlayDialogueLines());
     }
+
+    IEnumerator PlayDialogueLines()
+    {
+    foreach (string line in introLines)
+    {
+        dialogueText.text = "";
+        isTyping = true;
+        skipRequested = false;
+
+        // Start the typewriter effect
+        yield return StartCoroutine(TypeLine(line));
+
+        isTyping = false;
+
+        // Wait for spacebar or click to move to the next line
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
+    }
+
+    continueButton.gameObject.SetActive(true);
+    }
+    bool isTyping = false;
+    bool skipRequested = false;
+
+    IEnumerator TypeLine(string line)
+    {
+        for (int i = 0; i < line.Length; i++)
+        {
+            if (skipRequested)
+            {
+                dialogueText.text = line;
+                yield break;
+            }
+
+            dialogueText.text += line[i];
+            yield return new WaitForSeconds(typeDelay);
+
+            // If the user tries to skip mid-animation
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                skipRequested = true;
+            }
+        }
+    }
+
+
 }
