@@ -16,7 +16,9 @@ public class ElevatorIntroManager : MonoBehaviour
     public RectTransform mascot;
     public CanvasGroup dialogueBox;
     public Text dialogueText;
-    public Button continueButton;
+    public GameObject yesNoButtons;
+    public Text typingDotsText;
+    //public TextMeshProUGUI typingDotsText;
 
      private string[] introLines = new string[]
     {
@@ -77,24 +79,25 @@ public class ElevatorIntroManager : MonoBehaviour
 
     IEnumerator PlayDialogueLines()
     {
-    foreach (string line in introLines)
-    {
-        dialogueText.text = "";
-        isTyping = true;
-        skipRequested = false;
+        foreach (string line in introLines)
+        {
+            dialogueText.text = "";
+            isTyping = true;
+            skipRequested = false;
 
-        // Start the typewriter effect
-        AudioManager.instance.Play("Typing");
-        yield return StartCoroutine(TypeLine(line));
+            // Start the typewriter effect
+            AudioManager.instance.Play("Typing");
+            StartCoroutine(AnimateTypingDots());
+            yield return StartCoroutine(TypeLine(line));
 
-        isTyping = false;
-        AudioManager.instance.Stop("Typing");
-        // Wait for spacebar or click to move to the next line
-        yield return new WaitUntil(() => dialogueText.text == line);
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
-    }
-
-    continueButton.gameObject.SetActive(true);
+            isTyping = false;
+            AudioManager.instance.Stop("Typing");
+            // Wait for spacebar or click to move to the next line
+            yield return new WaitUntil(() => dialogueText.text == line);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
+        }
+        typingDotsText.gameObject.SetActive(false);
+        yesNoButtons.gameObject.SetActive(true);
     }
     bool isTyping = false;
     bool skipRequested = false;
@@ -189,4 +192,26 @@ public class ElevatorIntroManager : MonoBehaviour
         t -= 1;
         return (t * t * ((s + 1) * t + s) + 1);
     }
+    
+    private IEnumerator AnimateTypingDots()
+    {
+        string[] dotStates = { "", ".", "..", "..." };
+        string[] doneStates = {"", "..."};
+        int index = 0;
+
+        while (typingDotsText && isTyping) // this flag is already used in your script
+        {
+            typingDotsText.text = dotStates[index];
+            index = (index + 1) % dotStates.Length;
+            yield return new WaitForSeconds(0.4f);
+        }
+        while (typingDotsText && !isTyping)
+        {
+            typingDotsText.text = doneStates[index];
+            index = (index + 1) % doneStates.Length;
+            yield return new WaitForSeconds(0.4f);
+        }
+        //typingDotsText.text = ""; // clear after done typing
+    }
+
 }
