@@ -6,13 +6,14 @@ public class ElevatorIntroManager : MonoBehaviour
 {
     public RectTransform leftDoor;
     public RectTransform rightDoor;
+    public RectTransform textBubble;
 
     public float moveDistance = 400f; // Distance to slide doors
     public float moveDuration = 1f;   // Seconds it takes to open
     public AudioSource dingSound;
 
     public float typeDelay = 0.03f;
-    public GameObject mascot;
+    public RectTransform mascot;
     public CanvasGroup dialogueBox;
     public Text dialogueText;
     public Button continueButton;
@@ -69,6 +70,8 @@ public class ElevatorIntroManager : MonoBehaviour
         Destroy(rightDoor);
         AudioManager.instance.Stop("Ambiance");
         AudioManager.instance.Play("CorporateIntro");
+        StartCoroutine(FlyInImage(mascot, new Vector3(-490, -68, 0), 1.2f));
+        StartCoroutine(FlyInTextBubble(textBubble, new Vector3(0f, 0f, 0f), 0.8f));
         StartCoroutine(PlayDialogueLines());
     }
 
@@ -120,5 +123,70 @@ public class ElevatorIntroManager : MonoBehaviour
         }
     }
 
+    public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration)
+    {
+    image.gameObject.SetActive(true);
 
+    // Start offscreen or from above
+    Vector3 startPosition = targetPosition + new Vector3(1160f, 771f, 0f); // flying in from top-right
+    image.anchoredPosition = startPosition;
+
+    //float startRotation = 720f; // 2 full spins
+    float startRotation = 360f;
+    float endRotation = 0f;
+
+    float elapsed = 0f;
+
+    while (elapsed < duration)
+    {
+        float t = elapsed / duration;
+
+        float smoothT = Mathf.SmoothStep(0, 1, t);
+
+        //image.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+        float easedT = EaseOutBack(t, 1.5f); // same settle style
+
+        mascot.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
+
+        image.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(startRotation, endRotation, smoothT));
+        elapsed += Time.deltaTime;
+        yield return null;
+    }
+
+    image.anchoredPosition = targetPosition;
+    image.localRotation = Quaternion.Euler(0, 0, endRotation);
+    }
+
+    public IEnumerator FlyInTextBubble(RectTransform bubble, Vector3 targetPosition, float duration)
+    {
+        bubble.gameObject.SetActive(true);
+        dialogueBox.alpha = 0f;
+        
+        // Start position: off to the right
+        Vector3 startPosition = targetPosition + new Vector3(1000f, 0f, 0f);
+        bubble.anchoredPosition = startPosition;
+
+        float elapsed = 0f;
+        
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            float smoothT = Mathf.SmoothStep(0, 1, t);
+            dialogueBox.alpha = smoothT;
+           // bubble.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+            float easedT = EaseOutBack(t);
+
+            bubble.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        bubble.anchoredPosition = targetPosition;
+    }
+
+    float EaseOutBack(float t, float s = 1.5f)
+    {
+        t -= 1;
+        return (t * t * ((s + 1) * t + s) + 1);
+    }
 }

@@ -976,8 +976,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 38.349976, y: -65.01001}
-  m_SizeDelta: {x: -668.77, y: -625.98}
+  m_AnchoredPosition: {x: 1746.7, y: -65.01001}
+  m_SizeDelta: {x: -730.17, y: -625.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &961813580
 MonoBehaviour:
@@ -992,15 +992,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 834990cd0759663458cbacb67b727db8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1395,11 +1395,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftDoor: {fileID: 1706171787}
   rightDoor: {fileID: 2127228649}
+  textBubble: {fileID: 961813579}
   moveDistance: 970
   moveDuration: 3.5
   dingSound: {fileID: 1776171844}
   typeDelay: 0.03
-  mascot: {fileID: 1652812158}
+  mascot: {fileID: 1652812159}
   dialogueBox: {fileID: 961813582}
   dialogueText: {fileID: 1528199715}
   continueButton: {fileID: 0}
@@ -1935,7 +1936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -490, y: -68}
+  m_AnchoredPosition: {x: 1160, y: 771}
   m_SizeDelta: {x: 275, y: 460}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1652812160
