@@ -700,7 +700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.5849056, g: 0.42764327, b: 0.42764327, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2207,7 +2207,7 @@ GameObject:
   - component: {fileID: 1776171845}
   - component: {fileID: 1776171844}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: DingSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2689,7 +2689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9560da4451bef46afacffb9095e8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 24300002, guid: 6c9354103c3802249b754094e0febe03, type: 2}
   sounds:
   - name: UIClick
     clip: {fileID: 8300000, guid: 6702b7ef1f64c2748bc44a779bf30d06, type: 3}
@@ -2738,6 +2738,33 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: ClickNegative
     clip: {fileID: 8300000, guid: a5a03403777dc1842824aa9cc8a6b6af, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 24300002, guid: 6c9354103c3802249b754094e0febe03, type: 2}
+    source: {fileID: 0}
+  - name: Typing
+    clip: {fileID: 8300000, guid: 2e7785d24fdffb34faba31385a33c3a4, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 24300002, guid: 6c9354103c3802249b754094e0febe03, type: 2}
+    source: {fileID: 0}
+  - name: CorporateIntro
+    clip: {fileID: 8300000, guid: c62d1c8ac21b8284c8556a4e0410e354, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 24300002, guid: 6c9354103c3802249b754094e0febe03, type: 2}
+    source: {fileID: 0}
+  - name: Music
+    clip: {fileID: 8300000, guid: e01d4f1a6f4eae14091ee3f205bf1364, type: 3}
     volume: 1
     volumeVariance: 0
     pitch: 1

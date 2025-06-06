@@ -67,6 +67,8 @@ public class ElevatorIntroManager : MonoBehaviour
         rightDoor.anchoredPosition = rightTarget;
         Destroy(leftDoor);
         Destroy(rightDoor);
+        AudioManager.instance.Stop("Ambiance");
+        AudioManager.instance.Play("CorporateIntro");
         StartCoroutine(PlayDialogueLines());
     }
 
@@ -79,11 +81,13 @@ public class ElevatorIntroManager : MonoBehaviour
         skipRequested = false;
 
         // Start the typewriter effect
+        AudioManager.instance.Play("Typing");
         yield return StartCoroutine(TypeLine(line));
 
         isTyping = false;
-
+        AudioManager.instance.Stop("Typing");
         // Wait for spacebar or click to move to the next line
+        yield return new WaitUntil(() => dialogueText.text == line);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
     }
 
@@ -96,20 +100,23 @@ public class ElevatorIntroManager : MonoBehaviour
     {
         for (int i = 0; i < line.Length; i++)
         {
-            if (skipRequested)
+            //if (skipRequested)
+            //{
+            //    dialogueText.text = line;
+            //    skipRequested = false;
+            //    yield break;
+            //}
+
+            dialogueText.text += line[i];
+            // If the user tries to skip mid-animation
+            yield return new WaitForSeconds(typeDelay);
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
+               // skipRequested = true;
                 dialogueText.text = line;
                 yield break;
             }
-
-            dialogueText.text += line[i];
-            yield return new WaitForSeconds(typeDelay);
-
-            // If the user tries to skip mid-animation
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-                skipRequested = true;
-            }
+                     
         }
     }
 
