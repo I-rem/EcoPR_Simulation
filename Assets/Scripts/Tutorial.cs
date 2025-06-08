@@ -12,6 +12,7 @@ public class Tutorial : MonoBehaviour
     public float colorLerpDuration = 0.5f;
     public float jumpHeight = 30f;
     public float jumpDuration = 0.3f;
+    public RectTransform clipBoard;
 
     RectTransform rectTransform;
     Vector2 originalAnchoredPos;
@@ -25,6 +26,7 @@ public class Tutorial : MonoBehaviour
         originalAnchoredPos = rectTransform.anchoredPosition;
         originalColor = mascotImage.color;
         StartCoroutine(HappyJump());
+        StartCoroutine(FlyInImage(clipBoard, new Vector3(0, -538, 0), 1.0f));
     }
 
     public void TriggerAngryReaction()
@@ -99,4 +101,39 @@ public class Tutorial : MonoBehaviour
         mascotImage.color = toColor;
     }
 
+    public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration)
+    {
+    image.gameObject.SetActive(true);
+
+    // Start offscreen or from above
+    Vector3 startPosition = targetPosition + new Vector3(0f, -700f, 0f); 
+    image.anchoredPosition = startPosition;
+
+
+
+    float elapsed = 0f;
+
+    while (elapsed < duration)
+    {
+        float t = elapsed / duration;
+
+        float smoothT = Mathf.SmoothStep(0, 1, t);
+
+        image.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+        float easedT = EaseOutBack(t, 1.0f); // same settle style
+
+        image.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
+
+        elapsed += Time.deltaTime;
+        yield return null;
+    }
+
+    image.anchoredPosition = targetPosition;
+    }
+
+    float EaseOutBack(float t, float s = 1.5f)
+    {
+        t -= 1;
+        return (t * t * ((s + 1) * t + s) + 1);
+    }
 }

@@ -43,7 +43,6 @@ public class ElevatorIntroManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Pause after ding
         yield return StartCoroutine(OpenDoors());
         
-        // TODO: Start tutorial
     }
 
     IEnumerator OpenDoors()
