@@ -72,7 +72,8 @@ public class ElevatorIntroManager : MonoBehaviour
         AudioManager.instance.Stop("Ambiance");
         AudioManager.instance.Play("CorporateIntro");
         StartCoroutine(FlyInImage(mascot, new Vector3(-490, -68, 0), 1.2f));
-        StartCoroutine(FlyInTextBubble(textBubble, new Vector3(0f, 0f, 0f), 0.8f));
+        //StartCoroutine(FlyInTextBubble(textBubble, new Vector3(0f, 0f, 0f), 0.8f));
+        StartCoroutine(FlyInTextBubble(textBubble, new Vector3(-140f, 200f, 0f), 0.8f)); // Leaving space for the clipboard
         StartCoroutine(PlayDialogueLines());
     }
 
