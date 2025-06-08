@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -108,7 +108,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: cornEmotes_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 438
+        width: 79
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 146d7106fe94d344c9b8d2f9cec64a02
+      internalID: 1379405314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_1
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 455
+        width: 90
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e39307c2f3d9c49a1cb568dcec5d2b
+      internalID: -2144238544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_2
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 284
+        width: 89
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c8eab91721acd24198abe159b4004dc
+      internalID: 814231255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_3
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 189
+        width: 82
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb860972167420d479cc326b71d1ff45
+      internalID: 1116171790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 15
+        width: 108
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3959ee67034d7fb4c817f99b3aee9ef6
+      internalID: -1169757688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_5
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 20
+        width: 79
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9400a25d5e8851047bf0da1a1f8ce3d1
+      internalID: 1511410826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_6
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 20
+        width: 73
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbca1cd26bf386041a3c1a84fa1f45b0
+      internalID: -890978097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_7
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 456
+        width: 79
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71e5502e9ca7fe6478780cc0e98b5902
+      internalID: -818803129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_8
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 109
+        width: 74
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9597963dc6c0774fad00b5933698adb
+      internalID: -776700503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_9
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 111
+        width: 81
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 731af90b1356d95489a5e0e6a306ab21
+      internalID: 1310826904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_10
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 203
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab32c1567ba5def4fb0c35ab2b4cb014
+      internalID: 441853588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cornEmotes_11
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 362
+        width: 57
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79a5bd7f1a1756b4f9cb24dc1545005a
+      internalID: -988770776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +371,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cornEmotes_0: 1379405314
+      cornEmotes_1: -2144238544
+      cornEmotes_10: 441853588
+      cornEmotes_11: -988770776
+      cornEmotes_2: 814231255
+      cornEmotes_3: 1116171790
+      cornEmotes_4: -1169757688
+      cornEmotes_5: 1511410826
+      cornEmotes_6: -890978097
+      cornEmotes_7: -818803129
+      cornEmotes_8: -776700503
+      cornEmotes_9: 1310826904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
