@@ -16,6 +16,10 @@ public class UIScript : MonoBehaviour
 
     public Image image;
 
+    void Start()
+    {
+        StartCoroutine(FadeOut());
+    }
 
     void Update()
     {
@@ -103,6 +107,23 @@ public class UIScript : MonoBehaviour
         fadein = false;
         tempColor = image.color;
         tempColor.a = 1;
+        image.color = tempColor;
+    }
+
+    public IEnumerator FadeOut()
+    {
+        
+        var tempColor = image.color;
+        for (float f = 0; f <= 2; f += Time.deltaTime)
+        {
+            tempColor = image.color;
+            tempColor.a = Mathf.Lerp(1f, 0f, f / 2);
+            image.color = tempColor;
+            yield return null;
+        }
+        fadein = false;
+        tempColor = image.color;
+        tempColor.a = 0;
         image.color = tempColor;
     }
 }

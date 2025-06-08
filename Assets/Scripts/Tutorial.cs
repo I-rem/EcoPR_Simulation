@@ -7,11 +7,11 @@ public class Tutorial : MonoBehaviour
 {
     public GameObject mascot;
     public Image mascotImage;
-    public float shakeDuration = 0.4f;
-    public float shakeMagnitude = 10f;
+    public float shakeDuration = 0.5f;
+    public float shakeMagnitude = 12f;
     public float colorLerpDuration = 0.5f;
-    public float jumpHeight = 30f;
-    public float jumpDuration = 0.3f;
+    public float jumpHeight = 32f;
+    public float jumpDuration = 0.4f;
     public RectTransform clipBoard;
 
     RectTransform rectTransform;
