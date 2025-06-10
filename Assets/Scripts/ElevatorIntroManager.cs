@@ -23,7 +23,7 @@ public class ElevatorIntroManager : MonoBehaviour
      private string[] introLines = new string[]
     {
         "Ding! Welcome to GreenCore Solutions™!",
-        "I'm Verdy, your loyal sustainability ambassador.",
+        "I'm CJ, your loyal sustainability ambassador.",
         "We're here to help you *look* green, *feel* green... without necessarily *being* green.",
         "Ready to save the planet... one PR campaign at a time?"
     };

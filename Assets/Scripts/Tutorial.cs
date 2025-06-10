@@ -47,20 +47,10 @@ public class Tutorial : MonoBehaviour
 
      private string[] dashBoardLines = new string[]
     {
-        "Here is your first *Brand Risk Evaluation & Mitigation Scenario!* ✨",
-        "You'll be presented with sitations that require corporate finesse",
+        "Here is your first ~Brand Risk Evaluation & Mitigation Scenario!~",
+        "You'll be presented with situations and decisions that require corporate finesse",
         "Each choice will influence the forces tugging at our little green empire.",
-        "Here’s what you’ll be juggling",
-        "🧑🌾 Farmers & Producers – Our upstream partners. Without them, there’s no “organic supply chain” to overstate.",
-        "🏛️ Government & Regulations – audits and laws are annoying... unless they are by our side.",
-        "🗣️ Public Perception — the internet loves a villain. Don’t be it.",
-        "✊ Activist Pressure They chant. They dig. They tweet.",
-        "💰 Money – Every campaign, every pivot, every apology… costs.",
-        "Let any of them drop too low, and you’ll be dragged to the Boardroom of Accountability™ — and nobody comes back from that.",
-        "Alright, rookie.",
-        "Make us proud"
     };
-
     IEnumerator PlayDialogueLines(string[] Lines)
     {
         foreach (string line in Lines)
@@ -110,9 +100,54 @@ public class Tutorial : MonoBehaviour
         }
     }
 
+    public GameObject[] tutorialObjects;
+    public IEnumerator PlayAllDialogues()
+    {
+        yield return StartCoroutine(PlayDialogueLines(dashBoardLines));
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Here’s what you’ll be juggling"
+        }));
+        tutorialObjects[1].SetActive(true);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Farmers & Producers: Our upstream partners. Without them, there’s no “organic supply chain” to overstate."
+        }));
+        tutorialObjects[1].SetActive(false);
+        tutorialObjects[2].SetActive(true);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Activist Pressure: If they get too angry we might need a donation campaign."
+        }));
+        tutorialObjects[2].SetActive(false);
+        tutorialObjects[3].SetActive(true);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Public Perception: The image our brand holds in the people's eye."
+        }));
+        tutorialObjects[3].SetActive(false);
+        tutorialObjects[4].SetActive(true);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Stakeholder Confidence: The people in suits trust you to keep stock prices high. Don't let them down."
+        }));
+        tutorialObjects[4].SetActive(false);
+        tutorialObjects[5].SetActive(true);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Government & Regulations: Audits and laws are annoying... unless they are by our side."
+        }));
+        tutorialObjects[5].SetActive(false);
+        tutorialObjects[6].SetActive(true);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Money: Every campaign, every pivot, every apology… costs."
+        }));
+        tutorialObjects[6].SetActive(false);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Keep all the sliders in the green, or you’ll be dragged to the Boardroom of Accountability™ and nobody comes back from that."
+        }));
+        tutorialObjects[0].SetActive(false);
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Alright, rookie. Make us proud!"
+        }));
+    }
     public void TriggerHappyReaction()
     {
-        
+
         StopAllCoroutines();
         rectTransform = mascot.GetComponent<RectTransform>();
         originalAnchoredPos = rectTransform.anchoredPosition;
@@ -120,7 +155,11 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(HappyJump());
         StartCoroutine(FlyInImage(clipBoard, new Vector3(0, -538, 0), 1.0f));
         StartCoroutine(FlyInImage(scoresPanel, new Vector3(0, 0, 0), 1.0f));
-       // yield return new WaitForSeconds(0.5f);
+        StartCoroutine(PlayAllDialogues());
+        // yield return new WaitForSeconds(0.5f);
+        //StartCoroutine(PlayDialogueLines(dashBoardLines));
+        //StartCoroutine(PlayDialogueLines(dashBoardLines));
+        //StartCoroutine(PlayDialogueLines(dashBoardLines));
     }
 
     public void TriggerAngryReaction()
