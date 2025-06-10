@@ -18,59 +18,49 @@ public class Tutorial : MonoBehaviour
     Vector2 originalAnchoredPos;
     Color originalColor;
 
+    public Text dialogueText;
+    public Text typingDotsText;
+    public CanvasGroup dialogueBox;
+
+    public float typeDelay = 0.03f;
+    
+    private IEnumerator AnimateTypingDots()
+    {
+        string[] dotStates = { "", ".", "..", "..." };
+        string[] doneStates = {"", "..."};
+        int index = 0;
+
+        while (typingDotsText && isTyping) 
+        {
+            typingDotsText.text = dotStates[index];
+            index = (index + 1) % dotStates.Length;
+            yield return new WaitForSeconds(0.4f);
+        }
+        while (typingDotsText && !isTyping)
+        {
+            typingDotsText.text = doneStates[index];
+            index = (index + 1) % doneStates.Length;
+            yield return new WaitForSeconds(0.4f);
+        }
+        //typingDotsText.text = ""; // clear after done typing
+    }
+
      private string[] dashBoardLines = new string[]
     {
         "Here is your first *Brand Risk Evaluation & Mitigation Scenario!* ✨",
-        "I'm Verdy, your loyal sustainability ambassador.",
-        "We're here to help you *look* green, *feel* green... without necessarily *being* green.",
-        "Each choice will influence the forces tugging at our little green empire."
+        "You'll be presented with sitations that require corporate finesse",
+        "Each choice will influence the forces tugging at our little green empire.",
+        "Here’s what you’ll be juggling",
+        "🧑🌾 Farmers & Producers – Our upstream partners. Without them, there’s no “organic supply chain” to overstate.",
+        "🏛️ Government & Regulations – audits and laws are annoying... unless they are by our side.",
+        "🗣️ Public Perception — the internet loves a villain. Don’t be it.",
+        "✊ Activist Pressure They chant. They dig. They tweet.",
+        "💰 Money – Every campaign, every pivot, every apology… costs.",
+        "Let any of them drop too low, and you’ll be dragged to the Boardroom of Accountability™ — and nobody comes back from that.",
+        "Alright, rookie.",
+        "Make us proud"
     };
-/**
-Welcome to your first *Brand Risk Evaluation & Mitigation Scenario!* ✨
 
-Each day, you’ll be presented with a real-world situation that requires corporate finesse...  
-You’ll get multiple response options. Each will impact the world around you.
-
-Take a deep breath — it’s time to juggle **the five forces of greenwashing**:
-
-🧑🌾 Farmers & Producers — keep them on your side. No farmers, no future.
-🏛️ Government — audits and laws are annoying... but unavoidable.
-💰 Money — no campaign runs on air. Spend wisely.
-🗣️ Public Perception — the internet loves a villain. Don’t be it.
-✊ Activist Pressure — they’re watching. Closely.
-
-Every decision you make shifts these balances. Some may help one side… and hurt another.
-
-🎯 Your goal? Keep them all *just satisfied enough* to keep operations smooth.
-
-Got it? Okay. Let’s start with your first dilemma.
-
-Here’s what you’ll be juggling:
-🧑🌾 Farmers & Producers – Our upstream partners. Without them, there’s no “organic supply chain” to overstate.
-🏛️ Government & Regulations – Bureaucrats with clipboards and the power to ruin a fiscal quarter.
-💰 Money – Every campaign, every pivot, every apology… costs.
-🗣️ Public Perception – Social media loves authenticity, and we’re very good at faking it.
-✊ Activist Pressure – They chant. They dig. They tweet. Keep them just distracted enough.
-________________________________________
-[Mascot leans in, faux-conspiratorially.]
-VERDY:
-Balance is key. Make one group too happy, and another might come asking questions.
-Let any of them drop too low, and you’ll be dragged to the Boardroom of Accountability™ — and nobody comes back from that.
-________________________________________
-[Mascot walks toward the clipboard, tapping it.]
-VERDY:
-Oh, and here's a trade secret: sometimes, one decision opens up another.
-Say, agree to a tiny harmless label tweak today… and maybe that makes regulators more likely to approve your next green initiative.
-Ever heard of foot-in-the-door? Classic manipulation tactic. We’ve trademarked it as “Stepping Stone Advocacy™.”
-________________________________________
-[Mascot gives a little wink. Event card animates in — your first task.]
-VERDY:
-Alright, rookie. Time to play with power.
-Here’s your first situation — make it count. And remember:
-If it sounds ethical... you’re probably not trying hard enough.
-Let the game begin.
-
-**/
     IEnumerator PlayDialogueLines(string[] Lines)
     {
         foreach (string line in Lines)
@@ -91,7 +81,7 @@ Let the game begin.
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
         }
         typingDotsText.gameObject.SetActive(false);
-        yesNoButtons.gameObject.SetActive(true);
+
     }
     bool isTyping = false;
     bool skipRequested = false;
@@ -130,7 +120,7 @@ Let the game begin.
         StartCoroutine(HappyJump());
         StartCoroutine(FlyInImage(clipBoard, new Vector3(0, -538, 0), 1.0f));
         StartCoroutine(FlyInImage(scoresPanel, new Vector3(0, 0, 0), 1.0f));
-        yield return new WaitForSeconds(0.5f);
+       // yield return new WaitForSeconds(0.5f);
     }
 
     public void TriggerAngryReaction()
