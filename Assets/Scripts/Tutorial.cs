@@ -144,6 +144,7 @@ public class Tutorial : MonoBehaviour
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Alright, rookie. Make us proud!"
         }));
+        StartCoroutine(FlyInImage(tutorialObjects[7].GetComponent<RectTransform>(), new Vector3(0, -125, 0), 1.0f));
     }
     public void TriggerHappyReaction()
     {
