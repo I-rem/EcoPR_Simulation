@@ -57,7 +57,7 @@ public class Tutorial : MonoBehaviour
         {
             dialogueText.text = "";
             isTyping = true;
-            skipRequested = false;
+            //skipRequested = false;
 
             // Start the typewriter effect
             AudioManager.instance.Play("Typing");
@@ -70,7 +70,7 @@ public class Tutorial : MonoBehaviour
             yield return new WaitUntil(() => dialogueText.text == line);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0));
         }
-        typingDotsText.gameObject.SetActive(false);
+        //typingDotsText.gameObject.SetActive(false);
 
     }
     bool isTyping = false;
@@ -108,35 +108,42 @@ public class Tutorial : MonoBehaviour
             "Here’s what you’ll be juggling"
         }));
         tutorialObjects[1].SetActive(true);
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-10.96f, 4.09f, 0f), 1.0f,360f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Farmers & Producers: Our upstream partners. Without them, there’s no “organic supply chain” to overstate."
         }));
-        tutorialObjects[1].SetActive(false);
-        tutorialObjects[2].SetActive(true);
+        //tutorialObjects[1].SetActive(false);
+        //tutorialObjects[2].SetActive(true);
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-7.53f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Activist Pressure: If they get too angry we might need a donation campaign."
         }));
-        tutorialObjects[2].SetActive(false);
-        tutorialObjects[3].SetActive(true);
+       // tutorialObjects[2].SetActive(false);
+        //tutorialObjects[3].SetActive(true);
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-3.5f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Public Perception: The image our brand holds in the people's eye."
         }));
-        tutorialObjects[3].SetActive(false);
-        tutorialObjects[4].SetActive(true);
+        //tutorialObjects[3].SetActive(false);
+        //tutorialObjects[4].SetActive(true);
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(0.98f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Stakeholder Confidence: The people in suits trust you to keep stock prices high. Don't let them down."
         }));
-        tutorialObjects[4].SetActive(false);
-        tutorialObjects[5].SetActive(true);
+        //tutorialObjects[4].SetActive(false);
+        //tutorialObjects[5].SetActive(true);
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(4.94f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Government & Regulations: Audits and laws are annoying... unless they are by our side."
         }));
-        tutorialObjects[5].SetActive(false);
-        tutorialObjects[6].SetActive(true);
+       // tutorialObjects[5].SetActive(false);
+       // tutorialObjects[6].SetActive(true);
+       StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(10.07f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Money: Every campaign, every pivot, every apology… costs."
         }));
-        tutorialObjects[6].SetActive(false);
+        //tutorialObjects[6].SetActive(false);
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(15.07f, 4.09f, 0f), 1.0f,360f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Keep all the sliders in the green, or you’ll be dragged to the Boardroom of Accountability™ and nobody comes back from that."
         }));
@@ -144,6 +151,7 @@ public class Tutorial : MonoBehaviour
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Alright, rookie. Make us proud!"
         }));
+        AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[7].GetComponent<RectTransform>(), new Vector3(0, -125, 0), 1.0f));
     }
     public void TriggerHappyReaction()
@@ -154,6 +162,7 @@ public class Tutorial : MonoBehaviour
         originalAnchoredPos = rectTransform.anchoredPosition;
         originalColor = mascotImage.color;
         StartCoroutine(HappyJump());
+        typingDotsText.gameObject.SetActive(true);
         StartCoroutine(FlyInImage(clipBoard, new Vector3(0, -538, 0), 1.0f));
         StartCoroutine(FlyInImage(scoresPanel, new Vector3(0, 0, 0), 1.0f));
         StartCoroutine(PlayAllDialogues());
@@ -235,35 +244,70 @@ public class Tutorial : MonoBehaviour
         mascotImage.color = toColor;
     }
 
-    public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration)
+    
+    public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration, float startRotation)
     {
-    image.gameObject.SetActive(true);
+  
+        // Start offscreen or from above
+        //Vector3 startPosition = targetPosition + new Vector3(1160f, 771f, 0f); // flying in from top-right
+       Vector3 startPosition = image.anchoredPosition;
+       // image.anchoredPosition = startPosition;
 
-    // Start offscreen or from above
-    //Vector3 startPosition = targetPosition + new Vector3(0f, -700f, 0f); 
-    Vector3 startPosition = image.anchoredPosition;
-    //image.anchoredPosition = startPosition;
+        //float startRotation = 720f; // 2 full spins
+        //float startRotation = 360f;
+        float endRotation = 0f;
 
+        float elapsed = 0f;
 
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
 
-    float elapsed = 0f;
+            float smoothT = Mathf.SmoothStep(0, 1, t);
 
-    while (elapsed < duration)
-    {
-        float t = elapsed / duration;
+            //image.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+            float easedT = EaseOutBack(t, 1.5f); // same settle style
 
-        float smoothT = Mathf.SmoothStep(0, 1, t);
+            //mascot.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
+            image.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);    
+            image.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(startRotation, endRotation, smoothT));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
-        image.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
-        float easedT = EaseOutBack(t, 1.0f); // same settle style
-
-        image.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
-
-        elapsed += Time.deltaTime;
-        yield return null;
+        image.anchoredPosition = targetPosition;
+        image.localRotation = Quaternion.Euler(0, 0, endRotation);
     }
 
-    image.anchoredPosition = targetPosition;
+    public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration)
+    {
+        image.gameObject.SetActive(true);
+
+        // Start offscreen or from above
+        //Vector3 startPosition = targetPosition + new Vector3(0f, -700f, 0f); 
+        Vector3 startPosition = image.anchoredPosition;
+        //image.anchoredPosition = startPosition;
+
+
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+
+            float smoothT = Mathf.SmoothStep(0, 1, t);
+
+            image.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+            float easedT = EaseOutBack(t, 1.0f); // same settle style
+
+            image.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        image.anchoredPosition = targetPosition;
     }
 
     float EaseOutBack(float t, float s = 1.5f)

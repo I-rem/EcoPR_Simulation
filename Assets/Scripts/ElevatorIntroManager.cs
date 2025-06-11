@@ -23,8 +23,9 @@ public class ElevatorIntroManager : MonoBehaviour
      private string[] introLines = new string[]
     {
         "Ding! Welcome to GreenCore Solutions™!",
-        "I'm CJ, your loyal sustainability ambassador.",
-        "We're here to help you *look* green, *feel* green... without necessarily *being* green.",
+        "I'm your loyal sustainability ambassador Cornelius Jr.",
+        "But you can call me CJ",
+        "I'm here to help you *look* green, *feel* green... without necessarily *being* green.",
         "Ready to save the planet... one PR campaign at a time?"
     };
 
@@ -195,7 +196,7 @@ public class ElevatorIntroManager : MonoBehaviour
     
     private IEnumerator AnimateTypingDots()
     {
-        string[] dotStates = { "", ".", "..", "..." };
+        string[] dotStates = { ".", "..", "..." };
         string[] doneStates = {"", "..."};
         int index = 0;
 
