@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1cc80321c372648bb3e34032c2a6e0, type: 3}
+  m_Name: CornCrisis
+  m_EditorClassIdentifier: 
+  scenarioTitle: Corn Crisis
+  scenarioText: Corn prices skyrocket due to climate issues.
+  choices:
+  - choiceText: Subsidize local corn producers.
+    publicPerception: 0
+    activistPressure: 0
+    stakeholderSupport: 0
+    farmersProducers: 15
+    governmentRelations: 5
+    money: -20
+    followUpScenario: {fileID: 0}
+  - choiceText: Switch to cheaper foreign corn.
+    publicPerception: 0
+    activistPressure: 0
+    stakeholderSupport: 0
+    farmersProducers: -15
+    governmentRelations: -10
+    money: 10
+    followUpScenario: {fileID: 0}
+  - choiceText: "Say it\u2019s a 'corn shortage awareness month'"
+    publicPerception: 10
+    activistPressure: -5
+    stakeholderSupport: 0
+    farmersProducers: 0
+    governmentRelations: -5
+    money: 0
+    followUpScenario: {fileID: 0}
