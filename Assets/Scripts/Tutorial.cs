@@ -181,6 +181,37 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(AngryShakeAndColor());
     }
 
+    public void TriggerTest(int selection)
+    {
+        StartCoroutine(EndTutorial(selection));
+    }
+    IEnumerator EndTutorial(int selection)
+    {
+        dialogueText.text = "";
+        if (selection == 0)
+        {
+            StartCoroutine(HappyJump());
+            yield return StartCoroutine(PlayDialogueLines(new string[] {
+                "There you go, wasn't that easy?"
+            }));
+        }
+        else if (selection == 1)
+        {
+            StartCoroutine(HappyJump());
+            yield return StartCoroutine(PlayDialogueLines(new string[] {
+                "Hey, don't fix what isn't broken right?"
+            }));
+        }
+        else
+        {
+            yield return StartCoroutine(PlayDialogueLines(new string[] {
+                "Hey, don't fix what isn't broken right?"
+            }));
+        }
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+                "Keep it up and don't make us go bankrupt. I'll be back!"
+            }));
+    }
     IEnumerator AngryShakeAndColor()
     {
         StartCoroutine(ChangeColorGradually(originalColor, Color.red, colorLerpDuration));
