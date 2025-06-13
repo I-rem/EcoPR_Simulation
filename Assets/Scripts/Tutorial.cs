@@ -23,42 +23,44 @@ public class Tutorial : MonoBehaviour
     public CanvasGroup dialogueBox;
 
     public float typeDelay = 0.03f;
-    
+
     private IEnumerator AnimateTypingDots()
     {
-        string[] dotStates = { "", ".", "..", "..." };
-        string[] doneStates = {"", "..."};
+        string[] dotStates = { ".", "..", "..." };
+        string[] doneStates = { "", "..." };
         int index = 0;
 
-        while (typingDotsText && isTyping) 
+        while (typingDotsText && isTyping)
         {
+            if (index > 2)
+                index = 0;
             typingDotsText.text = dotStates[index];
-            index = (index + 1) % dotStates.Length;
+            //index = (index + 1) % dotStates.Length;
             yield return new WaitForSeconds(0.4f);
         }
         while (typingDotsText && !isTyping)
-        {
+        {   
+            if (index > 1)
+                index = 0;
             typingDotsText.text = doneStates[index];
-            index = (index + 1) % doneStates.Length;
             yield return new WaitForSeconds(0.4f);
         }
         //typingDotsText.text = ""; // clear after done typing
     }
 
-     private string[] dashBoardLines = new string[]
-    {
+    private string[] dashBoardLines = new string[]
+   {
         "Here is your first ~Brand Risk Evaluation & Mitigation Scenario!~",
         "You'll be presented with situations and decisions that require corporate finesse",
         "Each choice will influence the forces tugging at our little green empire.",
-    };
+   };
     IEnumerator PlayDialogueLines(string[] Lines)
     {
         foreach (string line in Lines)
         {
             dialogueText.text = "";
-            isTyping = true;
             //skipRequested = false;
-
+            isTyping = true;
             // Start the typewriter effect
             AudioManager.instance.Play("Typing");
             StartCoroutine(AnimateTypingDots());
@@ -92,15 +94,18 @@ public class Tutorial : MonoBehaviour
             yield return new WaitForSeconds(typeDelay);
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-               // skipRequested = true;
+                // skipRequested = true;
                 dialogueText.text = line;
+                isTyping = false;
                 yield break;
             }
-                     
+
         }
     }
 
     public GameObject[] tutorialObjects;
+
+    // To do maybe add glow effect
     public IEnumerator PlayAllDialogues()
     {
         yield return StartCoroutine(PlayDialogueLines(dashBoardLines));
@@ -108,42 +113,49 @@ public class Tutorial : MonoBehaviour
             "Here’s what you’ll be juggling"
         }));
         tutorialObjects[1].SetActive(true);
-        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-10.96f, 4.09f, 0f), 1.0f,360f));
+        AudioManager.instance.Play("Air");
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-10.96f, 4.09f, 0f), 1.0f, 360f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Farmers & Producers: Our upstream partners. Without them, there’s no “organic supply chain” to overstate."
         }));
         //tutorialObjects[1].SetActive(false);
         //tutorialObjects[2].SetActive(true);
+        AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-7.53f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Activist Pressure: If they get too angry we might need a donation campaign."
         }));
-       // tutorialObjects[2].SetActive(false);
+        // tutorialObjects[2].SetActive(false);
         //tutorialObjects[3].SetActive(true);
+        AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-3.5f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Public Perception: The image our brand holds in the people's eye."
         }));
         //tutorialObjects[3].SetActive(false);
         //tutorialObjects[4].SetActive(true);
+        AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(0.98f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Stakeholder Confidence: The people in suits trust you to keep stock prices high. Don't let them down."
         }));
         //tutorialObjects[4].SetActive(false);
         //tutorialObjects[5].SetActive(true);
+        AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(4.94f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Government & Regulations: Audits and laws are annoying... unless they are by our side."
         }));
-       // tutorialObjects[5].SetActive(false);
-       // tutorialObjects[6].SetActive(true);
-       StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(10.07f, 4.09f, 0f), 1.0f));
+        // tutorialObjects[5].SetActive(false);
+        // tutorialObjects[6].SetActive(true);
+        AudioManager.instance.Play("Air");
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(10.07f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Money: Every campaign, every pivot, every apology… costs."
         }));
         //tutorialObjects[6].SetActive(false);
-        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(15.07f, 4.09f, 0f), 1.0f,360f));
+        AudioManager.instance.Play("Air");
+        StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(15.07f, 4.09f, 0f), 1.0f, 360f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Keep all the sliders in the green, or you’ll be dragged to the Boardroom of Accountability™ and nobody comes back from that."
         }));
@@ -152,7 +164,7 @@ public class Tutorial : MonoBehaviour
             "Alright, rookie. Make us proud!"
         }));
         AudioManager.instance.Play("Air");
-        StartCoroutine(FlyInImage(tutorialObjects[7].GetComponent<RectTransform>(), new Vector3(0, -125, 0), 1.0f));
+        StartCoroutine(FlyInImage(tutorialObjects[7].GetComponent<RectTransform>(), new Vector3(-4f, -126f, 0f), 1.0f));
     }
     public void TriggerHappyReaction()
     {
@@ -211,6 +223,16 @@ public class Tutorial : MonoBehaviour
         yield return StartCoroutine(PlayDialogueLines(new string[] {
                 "Keep it up and don't make us go bankrupt. I'll be back!"
             }));
+        typingDotsText.gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        dialogueBox.gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.3f);
+        AudioManager.instance.Play("Air");
+        StartCoroutine(FlyInImage(mascot.GetComponent<RectTransform>(), new Vector3(1200, 40, 0), 2.0f, 1120f));
+       // StartCoroutine(FlyInImage(dialogueBox.GetComponent<RectTransform>(), new Vector3(1500, -125, 0), 1.0f, 360f));
+        // To do change slider values smoothly
+        // To do play new music
+        // To do change backgoound color smoothly
     }
     IEnumerator AngryShakeAndColor()
     {
@@ -275,14 +297,14 @@ public class Tutorial : MonoBehaviour
         mascotImage.color = toColor;
     }
 
-    
+
     public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration, float startRotation)
     {
-  
+
         // Start offscreen or from above
         //Vector3 startPosition = targetPosition + new Vector3(1160f, 771f, 0f); // flying in from top-right
-       Vector3 startPosition = image.anchoredPosition;
-       // image.anchoredPosition = startPosition;
+        Vector3 startPosition = image.anchoredPosition;
+        // image.anchoredPosition = startPosition;
 
         //float startRotation = 720f; // 2 full spins
         //float startRotation = 360f;
@@ -300,7 +322,7 @@ public class Tutorial : MonoBehaviour
             float easedT = EaseOutBack(t, 1.5f); // same settle style
 
             //mascot.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
-            image.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);    
+            image.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
             image.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(startRotation, endRotation, smoothT));
             elapsed += Time.deltaTime;
             yield return null;
@@ -346,4 +368,20 @@ public class Tutorial : MonoBehaviour
         t -= 1;
         return (t * t * ((s + 1) * t + s) + 1);
     }
+    /***
+    public IEnumerator SmoothChangeSlider(float target, float time)
+    {
+        float startValue = slider.value;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < time)
+        {
+            slider.value = Mathf.Lerp(startValue, target, timeElapsed / time);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        slider.value = target;
+    }
+    ***/
 }

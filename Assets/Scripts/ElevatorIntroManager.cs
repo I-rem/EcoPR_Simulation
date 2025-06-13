@@ -68,8 +68,8 @@ public class ElevatorIntroManager : MonoBehaviour
 
         leftDoor.anchoredPosition = leftTarget;
         rightDoor.anchoredPosition = rightTarget;
-        Destroy(leftDoor);
-        Destroy(rightDoor);
+        Destroy(leftDoor.gameObject);
+        Destroy(rightDoor.gameObject);
         AudioManager.instance.Stop("Ambiance");
         AudioManager.instance.Play("CorporateIntro");
         StartCoroutine(FlyInImage(mascot, new Vector3(-490, -68, 0), 1.2f));
@@ -84,7 +84,7 @@ public class ElevatorIntroManager : MonoBehaviour
         {
             dialogueText.text = "";
             isTyping = true;
-            skipRequested = false;
+            //skipRequested = false;
 
             // Start the typewriter effect
             AudioManager.instance.Play("Typing");
@@ -203,13 +203,17 @@ public class ElevatorIntroManager : MonoBehaviour
         while (typingDotsText && isTyping) // this flag is already used in your script
         {
             typingDotsText.text = dotStates[index];
-            index = (index + 1) % dotStates.Length;
+            index += 1;
+            if (index == 3)
+                index = 0;
             yield return new WaitForSeconds(0.4f);
         }
         while (typingDotsText && !isTyping)
         {
+            if (index > 1)
+                index = 0;
             typingDotsText.text = doneStates[index];
-            index = (index + 1) % doneStates.Length;
+            index += 1;
             yield return new WaitForSeconds(0.4f);
         }
         //typingDotsText.text = ""; // clear after done typing
