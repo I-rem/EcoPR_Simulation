@@ -101,7 +101,7 @@ public class ElevatorIntroManager : MonoBehaviour
         yesNoButtons.gameObject.SetActive(true);
     }
     bool isTyping = false;
-    bool skipRequested = false;
+    //bool skipRequested = false;
 
     IEnumerator TypeLine(string line)
     {

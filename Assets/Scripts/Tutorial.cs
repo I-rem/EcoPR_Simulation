@@ -7,6 +7,8 @@ public class Tutorial : MonoBehaviour
 {
     public GameObject mascot;
     public Image mascotImage;
+
+    public Image backgroundImage;
     public float shakeDuration = 0.5f;
     public float shakeMagnitude = 12f;
     public float colorLerpDuration = 0.5f;
@@ -76,7 +78,7 @@ public class Tutorial : MonoBehaviour
 
     }
     bool isTyping = false;
-    bool skipRequested = false;
+    //bool skipRequested = false;
 
     IEnumerator TypeLine(string line)
     {
@@ -229,6 +231,9 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(mascot.GetComponent<RectTransform>(), new Vector3(1200, 40, 0), 2.0f, 1120f));
+
+        StartCoroutine(ChangeColorGradually(backgroundImage, backgroundImage.color, Color.white, colorLerpDuration));
+
        // StartCoroutine(FlyInImage(dialogueBox.GetComponent<RectTransform>(), new Vector3(1500, -125, 0), 1.0f, 360f));
         // To do change slider values smoothly
         // To do play new music
@@ -296,7 +301,17 @@ public class Tutorial : MonoBehaviour
         }
         mascotImage.color = toColor;
     }
-
+    IEnumerator ChangeColorGradually(Image image, Color fromColor, Color toColor, float duration)
+    {
+        float t = 0f;
+        while (t < duration)
+        {
+            image.color = Color.Lerp(fromColor, toColor, t / duration);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        image.color = toColor;
+    }
 
     public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration, float startRotation)
     {

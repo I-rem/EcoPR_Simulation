@@ -4007,6 +4007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mascot: {fileID: 1652812158}
   mascotImage: {fileID: 1652812160}
+  backgroundImage: {fileID: 822778006}
   shakeDuration: 0.4
   shakeMagnitude: 0.3
   colorLerpDuration: 0.5
