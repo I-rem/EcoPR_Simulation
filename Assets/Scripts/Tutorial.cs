@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
+
+    public GameObject gameManager;
+
     int once = 1;
     public GameObject mascot;
     public Image mascotImage;
@@ -256,7 +259,7 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(FlyInImage(mascot.GetComponent<RectTransform>(), new Vector3(1200, 40, 0), 2.0f, 1120f));
 
         StartCoroutine(ChangeColorGradually(backgroundImage, backgroundImage.color, Color.white, colorLerpDuration));
-
+        gameManager.GetComponent<Scenarios>().PlayScenario(0);
        // StartCoroutine(FlyInImage(dialogueBox.GetComponent<RectTransform>(), new Vector3(1500, -125, 0), 1.0f, 360f));
         // To do change slider values smoothly
         // To do play new music
@@ -406,8 +409,8 @@ public class Tutorial : MonoBehaviour
         t -= 1;
         return (t * t * ((s + 1) * t + s) + 1);
     }
-    /***
-    public IEnumerator SmoothChangeSlider(float target, float time)
+    
+    public IEnumerator SmoothChangeSlider(Slider slider, float target, float time)
     {
         float startValue = slider.value;
         float timeElapsed = 0f;
@@ -421,5 +424,5 @@ public class Tutorial : MonoBehaviour
 
         slider.value = target;
     }
-    ***/
+    
 }
