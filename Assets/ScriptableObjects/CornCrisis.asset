@@ -31,7 +31,7 @@ MonoBehaviour:
     governmentRelations: -10
     money: 10
     followUpScenario: {fileID: 0}
-  - choiceText: "Say it\u2019s a 'corn shortage awareness month'"
+  - choiceText: "Say it\u2019s 'corn shortage awareness month'"
     publicPerception: 10
     activistPressure: -5
     stakeholderSupport: 0

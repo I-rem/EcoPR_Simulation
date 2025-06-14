@@ -39,6 +39,7 @@ public class Scenarios : MonoBehaviour
 
         currentCard = cards[index];
        // GameObject oldClipboard = Instantiate(clipboardPrefab, this.gameObject.transform.position, Quaternion.identity);
+       Destroy(GameObject.FindGameObjectWithTag("Remove"));
         GameObject oldClipboard = Instantiate(GameObject.FindGameObjectWithTag("Copy"), transform);
         TitleText.GetComponent<Text>().text = currentCard.scenarioTitle;
         DescriptionText.GetComponent<Text>().text = currentCard.scenarioText;
@@ -48,8 +49,8 @@ public class Scenarios : MonoBehaviour
         SetupChoiceButton(Button3, currentCard.choices[2]);
 
         AudioManager.instance.Play("Paper");
-        yield return StartCoroutine(FlyOutImage(oldClipboard.GetComponent<RectTransform>(), new Vector3(0, -200, 0), 1.0f));
-        //Destroy(oldClipboard);
+        yield return StartCoroutine(FlyOutImage(oldClipboard.GetComponent<RectTransform>(), new Vector3(0, -700, 0), 1.5f));
+        Destroy(oldClipboard);
 
     }
 
