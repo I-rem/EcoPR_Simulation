@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
+    int once = 1;
     public GameObject mascot;
     public Image mascotImage;
 
@@ -34,18 +35,34 @@ public class Tutorial : MonoBehaviour
 
         while (typingDotsText && isTyping)
         {
-            if (index > 2)
-                index = 0;
-            typingDotsText.text = dotStates[index];
+            // if (index > 2)
+            //     index = 0;
+            // typingDotsText.text = dotStates[index];
+            if (typingDotsText.text == "")
+                typingDotsText.text = ".";
+            else if (typingDotsText.text == ".")
+                typingDotsText.text = "..";
+            else if (typingDotsText.text == "..")
+                typingDotsText.text = "...";
+            else if (typingDotsText.text == "...")
+                typingDotsText.text = ".";
             //index = (index + 1) % dotStates.Length;
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.8f);
         }
         while (typingDotsText && !isTyping)
-        {   
-            if (index > 1)
-                index = 0;
-            typingDotsText.text = doneStates[index];
-            yield return new WaitForSeconds(0.4f);
+        {
+            //if (index > 1)
+            //    index = 0;
+            //typingDotsText.text = doneStates[index];
+            if (typingDotsText.text == "")
+                typingDotsText.text = "...";
+            else if (typingDotsText.text == ".")
+                typingDotsText.text = "..";
+            else if (typingDotsText.text == "..")
+                typingDotsText.text = "...";
+            else if (typingDotsText.text == "...")
+                typingDotsText.text = "";
+            yield return new WaitForSeconds(0.6f);
         }
         //typingDotsText.text = ""; // clear after done typing
     }
@@ -58,16 +75,18 @@ public class Tutorial : MonoBehaviour
    };
     IEnumerator PlayDialogueLines(string[] Lines)
     {
+        
         foreach (string line in Lines)
         {
+            isTyping = true;
             dialogueText.text = "";
             //skipRequested = false;
-            isTyping = true;
+            //isTyping = true;
             // Start the typewriter effect
             AudioManager.instance.Play("Typing");
-            StartCoroutine(AnimateTypingDots());
+            if (once == 0)
+                StartCoroutine(AnimateTypingDots());
             yield return StartCoroutine(TypeLine(line));
-
             isTyping = false;
             AudioManager.instance.Stop("Typing");
             // Wait for spacebar or click to move to the next line
@@ -110,13 +129,17 @@ public class Tutorial : MonoBehaviour
     // To do maybe add glow effect
     public IEnumerator PlayAllDialogues()
     {
+        //topCoroutine(AnimateTypingDots());
         yield return StartCoroutine(PlayDialogueLines(dashBoardLines));
+        
+        //StopCoroutine(AnimateTypingDots());
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Here’s what you’ll be juggling"
         }));
         tutorialObjects[1].SetActive(true);
         AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(-10.96f, 4.09f, 0f), 1.0f, 360f));
+       // StopCoroutine(AnimateTypingDots());
         yield return StartCoroutine(PlayDialogueLines(new string[] {
             "Farmers & Producers: Our upstream partners. Without them, there’s no “organic supply chain” to overstate."
         }));

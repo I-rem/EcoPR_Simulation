@@ -20,20 +20,20 @@ public class ElevatorIntroManager : MonoBehaviour
     public Text typingDotsText;
     //public TextMeshProUGUI typingDotsText;
 
-     private string[] introLines = new string[]
-    {
+    private string[] introLines = new string[]
+   {
         "Ding! Welcome to GreenCore Solutions™!",
         "I'm your loyal sustainability ambassador Cornelius Jr.",
         "But you can call me CJ",
         "I'm here to help you *look* green, *feel* green... without necessarily *being* green.",
         "Ready to save the planet... one PR campaign at a time?"
-    };
+   };
 
     void Start()
     {
         StartCoroutine(PlayIntroSequence());
-        
-        
+
+
     }
 
     IEnumerator PlayIntroSequence()
@@ -43,7 +43,7 @@ public class ElevatorIntroManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Pause after ding
         yield return StartCoroutine(OpenDoors());
-        
+
     }
 
     IEnumerator OpenDoors()
@@ -119,65 +119,65 @@ public class ElevatorIntroManager : MonoBehaviour
             yield return new WaitForSeconds(typeDelay);
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-               // skipRequested = true;
+                // skipRequested = true;
                 dialogueText.text = line;
                 yield break;
             }
-                     
+
         }
     }
 
     public IEnumerator FlyInImage(RectTransform image, Vector3 targetPosition, float duration)
     {
-    image.gameObject.SetActive(true);
+        image.gameObject.SetActive(true);
 
-    // Start offscreen or from above
-    Vector3 startPosition = targetPosition + new Vector3(1160f, 771f, 0f); // flying in from top-right
-    image.anchoredPosition = startPosition;
+        // Start offscreen or from above
+        Vector3 startPosition = targetPosition + new Vector3(1160f, 771f, 0f); // flying in from top-right
+        image.anchoredPosition = startPosition;
 
-    //float startRotation = 720f; // 2 full spins
-    float startRotation = 360f;
-    float endRotation = 0f;
+        //float startRotation = 720f; // 2 full spins
+        float startRotation = 360f;
+        float endRotation = 0f;
 
-    float elapsed = 0f;
+        float elapsed = 0f;
 
-    while (elapsed < duration)
-    {
-        float t = elapsed / duration;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
 
-        float smoothT = Mathf.SmoothStep(0, 1, t);
+            float smoothT = Mathf.SmoothStep(0, 1, t);
 
-        //image.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
-        float easedT = EaseOutBack(t, 1.5f); // same settle style
+            //image.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+            float easedT = EaseOutBack(t, 1.5f); // same settle style
 
-        mascot.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
+            mascot.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
 
-        image.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(startRotation, endRotation, smoothT));
-        elapsed += Time.deltaTime;
-        yield return null;
-    }
+            image.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(startRotation, endRotation, smoothT));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
-    image.anchoredPosition = targetPosition;
-    image.localRotation = Quaternion.Euler(0, 0, endRotation);
+        image.anchoredPosition = targetPosition;
+        image.localRotation = Quaternion.Euler(0, 0, endRotation);
     }
 
     public IEnumerator FlyInTextBubble(RectTransform bubble, Vector3 targetPosition, float duration)
     {
         bubble.gameObject.SetActive(true);
         dialogueBox.alpha = 0f;
-        
+
         // Start position: off to the right
         Vector3 startPosition = targetPosition + new Vector3(1000f, 0f, 0f);
         bubble.anchoredPosition = startPosition;
 
         float elapsed = 0f;
-        
+
         while (elapsed < duration)
         {
             float t = elapsed / duration;
             float smoothT = Mathf.SmoothStep(0, 1, t);
             dialogueBox.alpha = smoothT;
-           // bubble.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+            // bubble.anchoredPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
             float easedT = EaseOutBack(t);
 
             bubble.anchoredPosition = Vector3.LerpUnclamped(startPosition, targetPosition, easedT);
@@ -193,7 +193,7 @@ public class ElevatorIntroManager : MonoBehaviour
         t -= 1;
         return (t * t * ((s + 1) * t + s) + 1);
     }
-    
+    /**
     private IEnumerator AnimateTypingDots()
     {
         string[] dotStates = { ".", "..", "..." };
@@ -218,5 +218,44 @@ public class ElevatorIntroManager : MonoBehaviour
         }
         //typingDotsText.text = ""; // clear after done typing
     }
+    **/
+    private IEnumerator AnimateTypingDots()
+    {
+        string[] dotStates = { ".", "..", "..." };
+        string[] doneStates = { "", "..." };
+        int index = 0;
 
+        while (typingDotsText && isTyping)
+        {
+            // if (index > 2)
+            //     index = 0;
+            // typingDotsText.text = dotStates[index];
+            if (typingDotsText.text == "")
+                typingDotsText.text = ".";
+            else if (typingDotsText.text == ".")
+                typingDotsText.text = "..";
+            else if (typingDotsText.text == "..")
+                typingDotsText.text = "...";
+            else if (typingDotsText.text == "...")
+                typingDotsText.text = ".";
+            //index = (index + 1) % dotStates.Length;
+            yield return new WaitForSeconds(0.4f);
+        }
+        while (typingDotsText && !isTyping)
+        {
+            //if (index > 1)
+            //    index = 0;
+            //typingDotsText.text = doneStates[index];
+            if (typingDotsText.text == "")
+                typingDotsText.text = "...";
+            else if (typingDotsText.text == ".")
+                typingDotsText.text = "..";
+            else if (typingDotsText.text == "..")
+                typingDotsText.text = "...";
+            else if (typingDotsText.text == "...")
+                typingDotsText.text = "";
+            yield return new WaitForSeconds(0.4f);
+        }
+        //typingDotsText.text = ""; // clear after done typing
+    }
 }
