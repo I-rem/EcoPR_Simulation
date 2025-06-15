@@ -245,7 +245,7 @@ public class Tutorial : MonoBehaviour
 
             ScenariosScript.publicPerception += 10;
             ScenariosScript.stakeholderSupport += 10;
-            ScenariosScript.money -= 10;
+            ScenariosScript.money -= 5;
             StartCoroutine(HappyJump());
             yield return StartCoroutine(PlayDialogueLines(new string[] {
                 "There you go, wasn't that easy?"
@@ -259,7 +259,7 @@ public class Tutorial : MonoBehaviour
 
             ScenariosScript.publicPerception += 20;
             ScenariosScript.stakeholderSupport += 20;
-            ScenariosScript.money -= 20;
+            ScenariosScript.money -= 10;
             StartCoroutine(HappyJump());
             yield return StartCoroutine(PlayDialogueLines(new string[] {
                 "Truly wise beyond your years"

@@ -33,6 +33,15 @@ public class Scenarios : MonoBehaviour
     public int governmentRelations=50;
     public int money=50;
 
+    public void Awake()
+    {
+        publicPerception=50;
+        activistPressure=50;
+        stakeholderSupport=50;
+        farmersProducers=50;
+        governmentRelations=50;
+        money=60;
+    }
     public IEnumerator PlayCard(int index)
     {
         if (index < 0 || index >= cards.Length)
@@ -152,11 +161,11 @@ public class Scenarios : MonoBehaviour
 
     public void UpdateScores(Choice choice)
     {
-        StartCoroutine(SmoothChangeSlider(publicSlider, publicPerception + choice.publicPerception/100, 1.0f));
-        StartCoroutine(SmoothChangeSlider(activistSlider, activistPressure + choice.activistPressure/100, 1.0f));
-        StartCoroutine(SmoothChangeSlider(stakeholderSlider, stakeholderSupport + choice.stakeholderSupport/100, 1.0f));
-        StartCoroutine(SmoothChangeSlider(farmersSlider, farmersProducers + choice.farmersProducers/100, 1.0f));
-        StartCoroutine(SmoothChangeSlider(govSlider, governmentRelations + choice.governmentRelations/100, 1.0f));
+        StartCoroutine(SmoothChangeSlider(publicSlider, publicPerception + choice.publicPerception, 1.0f));
+        StartCoroutine(SmoothChangeSlider(activistSlider, activistPressure + choice.activistPressure, 1.0f));
+        StartCoroutine(SmoothChangeSlider(stakeholderSlider, stakeholderSupport + choice.stakeholderSupport, 1.0f));
+        StartCoroutine(SmoothChangeSlider(farmersSlider, farmersProducers + choice.farmersProducers, 1.0f));
+        StartCoroutine(SmoothChangeSlider(govSlider, governmentRelations + choice.governmentRelations, 1.0f));
         StartCoroutine(SmoothChangeSlider(moneySlider, money + choice.money, 1.0f));
 
         publicPerception += choice.publicPerception;
