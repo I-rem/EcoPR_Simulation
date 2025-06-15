@@ -7,6 +7,7 @@ public class Tutorial : MonoBehaviour
 {
 
     public GameObject gameManager;
+    public Scenarios ScenariosScript;
 
     int once = 1;
     public GameObject mascot;
@@ -30,6 +31,10 @@ public class Tutorial : MonoBehaviour
 
     public float typeDelay = 0.03f;
 
+    private void Start()
+    {
+        ScenariosScript = gameManager.GetComponent<Scenarios>();
+    }
     private IEnumerator AnimateTypingDots()
     {
         string[] dotStates = { ".", "..", "..." };
@@ -231,8 +236,16 @@ public class Tutorial : MonoBehaviour
     IEnumerator EndTutorial(int selection)
     {
         dialogueText.text = "";
+
         if (selection == 0)
         {
+            StartCoroutine(SmoothChangeSlider(ScenariosScript.publicSlider, ScenariosScript.publicPerception + 10, 1.0f));
+            StartCoroutine(SmoothChangeSlider(ScenariosScript.stakeholderSlider, ScenariosScript.stakeholderSupport + 10, 1.0f));
+            StartCoroutine(SmoothChangeSlider(ScenariosScript.moneySlider, -10, 1.0f));
+
+            ScenariosScript.publicPerception += 10;
+            ScenariosScript.stakeholderSupport += 10;
+            ScenariosScript.money -= 10;
             StartCoroutine(HappyJump());
             yield return StartCoroutine(PlayDialogueLines(new string[] {
                 "There you go, wasn't that easy?"
@@ -240,6 +253,13 @@ public class Tutorial : MonoBehaviour
         }
         else if (selection == 1)
         {
+            StartCoroutine(SmoothChangeSlider(ScenariosScript.publicSlider, ScenariosScript.publicPerception + 20, 1.0f));
+            StartCoroutine(SmoothChangeSlider(ScenariosScript.stakeholderSlider, ScenariosScript.stakeholderSupport + 20, 1.0f));
+            StartCoroutine(SmoothChangeSlider(ScenariosScript.moneySlider, -20, 1.0f));
+
+            ScenariosScript.publicPerception += 20;
+            ScenariosScript.stakeholderSupport += 20;
+            ScenariosScript.money -= 20;
             StartCoroutine(HappyJump());
             yield return StartCoroutine(PlayDialogueLines(new string[] {
                 "Truly wise beyond your years"
