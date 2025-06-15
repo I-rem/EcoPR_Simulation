@@ -165,7 +165,7 @@ public class Tutorial : MonoBehaviour
         AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(0.98f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
-            "Stakeholder Confidence: The people in suits trust you to keep stock prices high. Don't let them down."
+            "Stakeholder Confidence: C-suit trusts you to keep stock prices high. Don't let them down."
         }));
         //tutorialObjects[4].SetActive(false);
         //tutorialObjects[5].SetActive(true);
@@ -179,13 +179,16 @@ public class Tutorial : MonoBehaviour
         AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(10.07f, 4.09f, 0f), 1.0f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
-            "Money: Every campaign, every pivot, every apology… costs."
+            "Money: Every campaign, every pivot, every apology costs. A lot!"
         }));
         //tutorialObjects[6].SetActive(false);
         AudioManager.instance.Play("Air");
         StartCoroutine(FlyInImage(tutorialObjects[1].GetComponent<RectTransform>(), new Vector3(15.07f, 4.09f, 0f), 1.0f, 360f));
         yield return StartCoroutine(PlayDialogueLines(new string[] {
-            "Keep all the sliders in the green, or you’ll be dragged to the Boardroom of Accountability™ and nobody comes back from that."
+            "Do your best to keep the sliders green."
+        }));
+        yield return StartCoroutine(PlayDialogueLines(new string[] {
+            "Or you’ll be dragged to the Boardroom of Accountability™ and nobody comes back from that."
         }));
         tutorialObjects[0].SetActive(false);
         yield return StartCoroutine(PlayDialogueLines(new string[] {
@@ -239,7 +242,7 @@ public class Tutorial : MonoBehaviour
         {
             StartCoroutine(HappyJump());
             yield return StartCoroutine(PlayDialogueLines(new string[] {
-                "Hey, don't fix what isn't broken right?"
+                "Truly wise beyond your years"
             }));
         }
         else

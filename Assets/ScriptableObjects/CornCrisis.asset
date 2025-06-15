@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CornCrisis
   m_EditorClassIdentifier: 
   scenarioTitle: Corn Crisis
+  icon: {fileID: 21300000, guid: 48a42e49af021e346bc33458b0209ad8, type: 3}
   scenarioText: Corn prices skyrocket due to climate issues.
   choices:
   - choiceText: Subsidize local corn producers.
@@ -31,11 +32,11 @@ MonoBehaviour:
     governmentRelations: -10
     money: 10
     followUpScenario: {fileID: 0}
-  - choiceText: "Say it\u2019s 'corn shortage awareness month'"
-    publicPerception: 10
-    activistPressure: -5
-    stakeholderSupport: 0
+  - choiceText: Increase the prices
+    publicPerception: -5
+    activistPressure: 0
+    stakeholderSupport: 5
     farmersProducers: 0
-    governmentRelations: -5
-    money: 0
+    governmentRelations: 0
+    money: 5
     followUpScenario: {fileID: 0}

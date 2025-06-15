@@ -12,6 +12,7 @@ public class Scenarios : MonoBehaviour
     public RectTransform clipboardRect;
     public GameObject TitleText;
     public GameObject DescriptionText;
+    public GameObject Icon;
     public GameObject Button1;
     public GameObject Button2;
     public GameObject Button3;
@@ -39,11 +40,11 @@ public class Scenarios : MonoBehaviour
 
         currentCard = cards[index];
        // GameObject oldClipboard = Instantiate(clipboardPrefab, this.gameObject.transform.position, Quaternion.identity);
-       Destroy(GameObject.FindGameObjectWithTag("Remove"));
+        Destroy(GameObject.FindGameObjectWithTag("Remove"));
         GameObject oldClipboard = Instantiate(GameObject.FindGameObjectWithTag("Copy"), transform);
         TitleText.GetComponent<Text>().text = currentCard.scenarioTitle;
         DescriptionText.GetComponent<Text>().text = currentCard.scenarioText;
-
+        Icon.GetComponent<Image>().sprite = currentCard.icon;
         SetupChoiceButton(Button1, currentCard.choices[0]);
         SetupChoiceButton(Button2, currentCard.choices[1]);
         SetupChoiceButton(Button3, currentCard.choices[2]);

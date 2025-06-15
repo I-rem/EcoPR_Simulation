@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewScenario", menuName = "PRGame/Scenario Card")]
 public class ScenarioCard : ScriptableObject
 {
     public string scenarioTitle;
-
+    public Sprite icon;
     [TextArea(2, 5)]
     public string scenarioText;
     public Choice[] choices;
